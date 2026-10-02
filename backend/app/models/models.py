@@ -38,3 +38,9 @@ class AllocationRun(Base):
     segment_id: Mapped[int] = mapped_column(ForeignKey("segments.id"))
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     result_json: Mapped[str] = mapped_column(Text, default="{}")
+    # 确认时刻固化：当时挡柱禁入带并集的规范化几何及其哈希，与 result_json 同生同存，事后不改写。
+    geom_hash: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    geom_json: Mapped[str | None] = mapped_column(Text, nullable=True)
+    # 放不下旁注摘要逐字落库；summary_sig 覆盖 (geom_hash, summary)，截短/改写即验签失败。
+    summary: Mapped[str | None] = mapped_column(Text, nullable=True)
+    summary_sig: Mapped[str | None] = mapped_column(String(80), nullable=True)
