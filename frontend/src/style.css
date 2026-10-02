@@ -146,3 +146,91 @@ th { color: var(--ss-muted); font-weight: 700; font-size: 0.78rem; }
 
 .stall-strip { display: flex; height: 56px; border: 2px solid var(--ss-curb); overflow: hidden; margin: 0.75rem 0; background: #3a3126; }
 .stall-cell { display: flex; align-items: center; justify-content: center; font-size: 0.7rem; border-right: 1px solid rgba(255,255,255,0.08); overflow: hidden; white-space: nowrap; }
+
+/* ---- frozen-run UI: actions, panels, drawer, verbatim summary ---- */
+.ss-actions { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; }
+.btn-ghost {
+  background: transparent; color: var(--ss-curb);
+  border: 2px solid var(--ss-curb); box-shadow: 2px 2px 0 rgba(42,36,28,0.25);
+}
+.ss-error {
+  margin: 0.25rem 0; padding: 0.4rem 0.6rem;
+  background: rgba(163,58,44,0.14); color: var(--ss-bad);
+  border-left: 3px solid var(--ss-bad); font-size: 0.82rem;
+}
+.ss-stage { overflow-y: auto; }
+.ss-compare { display: flex; flex-direction: column; gap: 0.75rem; }
+@media (min-width: 1080px) {
+  .ss-compare-twin { flex-direction: row; align-items: flex-start; }
+  .ss-compare-twin .ss-runpanel { flex: 1 1 0; min-width: 0; }
+}
+.ss-runpanel { margin-bottom: 0; }
+.ss-runpanel-old { border-style: dashed; }
+.ss-panel-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 0.5rem; margin-bottom: 0.4rem;
+}
+.ss-flags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.4rem; }
+.ss-flags .badge:not(.badge-bad):not(.badge-warn) {
+  background: rgba(92,74,50,0.14); color: var(--ss-curb);
+}
+.ss-band-mini { height: 100px; min-height: 100px; }
+.ss-summary {
+  margin: 0.55rem 0 0; padding: 0.55rem 0.65rem;
+  background: #2a241c; color: #ecdcb8;
+  border-radius: 3px;
+  font-family: "SFMono-Regular", Consolas, "PingFang SC", monospace;
+  font-size: 0.74rem; line-height: 1.5;
+  white-space: pre-wrap; word-break: break-word;
+  max-height: 230px; overflow: auto;
+}
+.ss-summary-mini { margin: 0.35rem 0 0; max-height: 120px; font-size: 0.68rem; }
+
+.ss-drawer {
+  position: fixed; top: 45px; right: 0; bottom: 0;
+  width: min(380px, 92vw);
+  background: var(--ss-paper);
+  border-left: 3px solid var(--ss-accent);
+  box-shadow: -6px 0 24px rgba(26,20,14,0.25);
+  z-index: 30; display: flex; flex-direction: column;
+}
+.ss-drawer-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.6rem 0.8rem; border-bottom: 2px solid var(--ss-curb);
+  font-weight: 800;
+}
+.ss-x {
+  border: none; background: transparent; font-size: 1.3rem;
+  line-height: 1; cursor: pointer; color: var(--ss-curb);
+}
+.ss-runlist { list-style: none; margin: 0; padding: 0.5rem; overflow-y: auto; }
+.ss-runlist li {
+  padding: 0.55rem 0.6rem; margin-bottom: 0.5rem;
+  border: 2px solid rgba(92,74,50,0.35); border-radius: 4px;
+  cursor: pointer; background: rgba(255,255,255,0.35);
+}
+.ss-runlist li:hover { border-color: var(--ss-accent); }
+.ss-runlist li.active { border-color: var(--ss-accent); box-shadow: inset 0 0 0 1px var(--ss-accent); }
+.ss-runline { display: flex; justify-content: space-between; font-weight: 700; font-size: 0.82rem; }
+
+.ss-slide-enter-active, .ss-slide-leave-active { transition: transform 0.18s ease, opacity 0.18s ease; }
+.ss-slide-enter-from, .ss-slide-leave-to { transform: translateX(24px); opacity: 0; }
+
+/* 放不下 — 主表 + 旁注 */
+.ss-rejected-grid { display: flex; flex-direction: column; gap: 0.75rem; }
+@media (min-width: 980px) {
+  .ss-rejected-grid { flex-direction: row; align-items: flex-start; }
+  .ss-rejected-grid .card:first-child { flex: 1 1 0; min-width: 0; }
+  .ss-margin-note { flex: 0 0 360px; position: sticky; top: 0.5rem; }
+}
+.ss-margin-note { margin-bottom: 0; }
+
+/* 表单 */
+.ss-form-row { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: flex-end; margin-top: 0.5rem; }
+.ss-form-row label { display: flex; flex-direction: column; gap: 0.2rem; font-size: 0.78rem; color: var(--ss-muted); }
+input {
+  padding: 0.3rem 0.45rem; border: 2px solid var(--ss-curb);
+  border-radius: 3px; background: #fffaf0; color: var(--ss-ink);
+  font: inherit; min-width: 90px;
+}
+td input { min-width: 0; }

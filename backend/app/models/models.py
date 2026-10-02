@@ -38,3 +38,7 @@ class AllocationRun(Base):
     segment_id: Mapped[int] = mapped_column(ForeignKey("segments.id"))
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     result_json: Mapped[str] = mapped_column(Text, default="{}")
+    # Frozen at confirmation time: normalized blocked-band union hash + verbatim summary.
+    # Never recomputed or overwritten when pillars change afterwards.
+    geometry_hash: Mapped[str] = mapped_column(String(96), default="")
+    summary: Mapped[str] = mapped_column(Text, default="")
